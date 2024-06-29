@@ -3,6 +3,7 @@ package com.example.abreu.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -23,21 +24,33 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         Button botonIngresar = findViewById(R.id.button);
+            EditText txCorreo = findViewById(R.id.txCorreo);
+            EditText txContraseña = findViewById(R.id.txContraseña);
+         Button botonCerrar = findViewById(R.id.button2);
 
-        Button botonCancelar2 = findViewById(R.id.button2);
 
         botonIngresar.setOnClickListener(v -> {
-           // Toast.makeText(this,"Ingreso Correctamente",Toast.LENGTH_SHORT).show();
 
-            Intent VentanaPrincipal = new Intent(this, MainActivity.class);
+            if (txCorreo.getText().toString().isEmpty()) {
 
-            startActivity(VentanaPrincipal);
+                Toast.makeText(this, "Debe de Introducir un Correo", Toast.LENGTH_SHORT).show();
 
+            } else if (txContraseña.getText().toString().isEmpty()) {
+
+                Toast.makeText(this, "Debe Introducir La Contraseña", Toast.LENGTH_SHORT).show();
+            } else {
+                Intent VentanaPrincipal = new Intent(this, MainActivity.class);
+
+                startActivity(VentanaPrincipal);
+
+            }
         });
 
-        botonCancelar2.setOnClickListener(v -> {
+        botonCerrar.setOnClickListener(v -> {
+
             finish();
         });
+
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
